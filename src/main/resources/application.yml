@@ -1,0 +1,24 @@
+server:
+  port: 8081
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 50468664243-7agc4k3k3t04bdrvm6i9ft40j8kjvo1m.apps.googleusercontent.com
+            client-secret: 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
+            scope: openid, profile, email
+
+          keycloak:
+            authorization-grant-type: authorization_code
+            client-id: oauth2-client-app
+            client-name: oauth2-client-app
+            client-secret: diPtMOfy4jAJgivXLRDX1lXYgk1MAK7q
+            redirect-uri: http://localhost:8081/login/oauth2/code/keycloak
+            scope: profile,email
+
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/oauth2
+            user-name-attribute: preferred_username
