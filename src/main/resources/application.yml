@@ -1,3 +1,4 @@
+
 server:
   port: 8081
 spring:
@@ -22,3 +23,6 @@ spring:
           keycloak:
             issuer-uri: http://localhost:8080/realms/oauth2
             user-name-attribute: preferred_username
+logging:
+  level:
+    oauth2client.sociallogin: debug
