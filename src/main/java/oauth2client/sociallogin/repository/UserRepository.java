@@ -12,7 +12,7 @@ public class UserRepository {
     private Map<String, Object> users = new ConcurrentHashMap<>();
 
     public User findByUsername(String username) {
-        if(users.containsKey("username")) {
+        if(users.containsKey(username)) {
             return (User)users.get(username);
         }
         log.debug("해당 유저를 찾지 못했습니다.");
