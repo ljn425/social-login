@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeController {
     @GetMapping("/api/user")
-    public String user(Authentication authentication, @AuthenticationPrincipal OAuth2User oAuth2User) {
+    public Authentication user(Authentication authentication, @AuthenticationPrincipal OAuth2User oAuth2User) {
         System.out.println("authentication = " + authentication);
         System.out.println("oAuth2User = " + oAuth2User);
-        return "authentication";
+        return authentication;
     }
 
     @GetMapping("/api/oidc")
-    public String oidc(Authentication authentication, @AuthenticationPrincipal OidcUser oidcUser) {
+    public Authentication oidc(Authentication authentication, @AuthenticationPrincipal OidcUser oidcUser) {
         System.out.println("authentication = " + authentication);
         System.out.println("oidcUser = " + oidcUser);
-        return "authentication";
+        return authentication;
     }
 }

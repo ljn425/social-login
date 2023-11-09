@@ -20,7 +20,13 @@ public class IndexController {
 
         OAuth2AuthenticationToken oAuth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
         if (oAuth2AuthenticationToken != null) {
-           model.addAttribute("user", oAuth2User.getName());
+            Map<String, Object> attributes = oAuth2User.getAttributes();
+            String name = (String) attributes.get("name");
+            if (oAuth2AuthenticationToken.getAuthorizedClientRegistrationId().equals("naver")) {
+                Map<String, Object> response = (Map<String, Object>)attributes.get("response");
+                name = (String) response.get("name");
+            }
+            model.addAttribute("user", name);
         }
         return "index";
     }
