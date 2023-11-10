@@ -1,4 +1,4 @@
-package oauth2client.sociallogin.mapper;
+package oauth2client.sociallogin.common.mapper;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

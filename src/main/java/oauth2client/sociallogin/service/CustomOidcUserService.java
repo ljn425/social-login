@@ -1,7 +1,8 @@
 package oauth2client.sociallogin.service;
 
-import oauth2client.sociallogin.converters.ProviderUserConverter;
-import oauth2client.sociallogin.converters.ProviderUserRequest;
+import oauth2client.sociallogin.common.converters.ProviderUserConverter;
+import oauth2client.sociallogin.common.converters.ProviderUserRequest;
+import oauth2client.sociallogin.model.PrincipalUser;
 import oauth2client.sociallogin.model.ProviderUser;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
@@ -31,7 +32,7 @@ public class CustomOidcUserService extends AbstractOAuth2UserService implements 
         // DB 회원가입
         super.register(providerUser, userRequest);
 
-        return oidcUser;
+        return new PrincipalUser(providerUser);
     }
 
 

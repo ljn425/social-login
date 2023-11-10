@@ -1,4 +1,4 @@
-package oauth2client.sociallogin.enums;
+package oauth2client.sociallogin.common.enums;
 
 import lombok.Getter;
 

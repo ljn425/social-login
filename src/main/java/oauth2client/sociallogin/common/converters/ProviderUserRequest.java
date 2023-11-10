@@ -1,4 +1,4 @@
-package oauth2client.sociallogin.converters;
+package oauth2client.sociallogin.common.converters;
 
 import oauth2client.sociallogin.model.users.User;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
@@ -8,7 +8,6 @@ public record ProviderUserRequest(ClientRegistration clientRegistration, OAuth2U
     public ProviderUserRequest(ClientRegistration clientRegistration, OAuth2User oAuth2User) {
         this(clientRegistration, oAuth2User, null);
     }
-
     public ProviderUserRequest(User user) {
         this(null, null, user);
     }

@@ -1,9 +1,9 @@
-package oauth2client.sociallogin.converters;
+package oauth2client.sociallogin.common.converters;
 
-import oauth2client.sociallogin.enums.OAuth2Config;
+import oauth2client.sociallogin.common.enums.OAuth2Config;
 import oauth2client.sociallogin.model.ProviderUser;
 import oauth2client.sociallogin.model.social.NaverUser;
-import oauth2client.sociallogin.util.OAuth2Utils;
+import oauth2client.sociallogin.common.util.OAuth2Utils;
 
 public class OAuth2NaverProviderUserConverter implements ProviderUserConverter<ProviderUserRequest, ProviderUser> {
     @Override

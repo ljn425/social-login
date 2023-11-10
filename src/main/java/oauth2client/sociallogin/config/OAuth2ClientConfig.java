@@ -1,7 +1,7 @@
 package oauth2client.sociallogin.config;
 
 import lombok.RequiredArgsConstructor;
-import oauth2client.sociallogin.mapper.CustomAuthorityMapper;
+import oauth2client.sociallogin.common.mapper.CustomAuthorityMapper;
 import oauth2client.sociallogin.resolver.CustomOAuth2AuthorizationRequestResolver;
 import oauth2client.sociallogin.service.CustomOAuth2UserService;
 import oauth2client.sociallogin.service.CustomOidcUserService;
@@ -32,14 +32,14 @@ public class OAuth2ClientConfig {
                 .requestMatchers("/").permitAll()
                 .anyRequest().authenticated());
 
-//        http.formLogin(formLogin -> formLogin
-//                .loginPage("/login")
-//                .loginProcessingUrl("/loginProc")
-//                .defaultSuccessUrl("/")
-//                .permitAll());
+        http.formLogin(formLogin -> formLogin
+                .loginPage("/login")
+                .loginProcessingUrl("/loginProc")
+                .defaultSuccessUrl("/")
+                .permitAll());
 
-//        http.exceptionHandling(exceptionHandling -> exceptionHandling
-//                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")));
+        http.exceptionHandling(exceptionHandling -> exceptionHandling
+                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")));
 
         http.oauth2Login(oauth2 -> oauth2
 //                .authorizationEndpoint(authorizationEndpointConfig -> authorizationEndpointConfig
@@ -48,8 +48,8 @@ public class OAuth2ClientConfig {
                         .userService(customOAuth2UserService)
                         .oidcUserService(customOidcUserService)));
 
-        http.logout(logout -> logout
-                .logoutSuccessUrl("/"));
+//        http.logout(logout -> logout
+//                .logoutSuccessUrl("/"));
 
         return http.build();
     }
