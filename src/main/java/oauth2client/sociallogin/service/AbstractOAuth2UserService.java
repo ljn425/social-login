@@ -3,10 +3,11 @@ package oauth2client.sociallogin.service;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import oauth2client.sociallogin.model.*;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import oauth2client.sociallogin.converters.ProviderUserConverter;
+import oauth2client.sociallogin.converters.ProviderUserRequest;
+import oauth2client.sociallogin.model.ProviderUser;
+import oauth2client.sociallogin.model.users.User;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 @Service
 @Getter
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class AbstractOAuth2UserService {
 
     private final UserService userService;
+    private final ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter;
 
     public void register(ProviderUser providerUser, OAuth2UserRequest userRequest) {
         User user = userService.findByUsername(providerUser.getUsername());
@@ -27,13 +29,7 @@ public class AbstractOAuth2UserService {
         }
     }
 
-    public ProviderUser providerUser(ClientRegistration clientRegistration, OAuth2User oAuth2User) {
-        String registrationId = clientRegistration.getRegistrationId();
-        return switch (registrationId) {
-            case "keycloak" -> new KeycloakUser(oAuth2User, clientRegistration);
-            case "google" -> new GoogleUser(oAuth2User, clientRegistration);
-            case "naver" -> new NaverUser(oAuth2User, clientRegistration);
-            default -> null;
-        };
+    public ProviderUser providerUser(ProviderUserRequest providerUserRequest) {
+        return providerUserConverter.converter(providerUserRequest);
     }
 }

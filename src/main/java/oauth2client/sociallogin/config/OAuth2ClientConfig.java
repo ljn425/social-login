@@ -13,6 +13,7 @@ import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMap
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestResolver;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
 @EnableWebSecurity
 @Configuration
@@ -29,12 +30,20 @@ public class OAuth2ClientConfig {
                 .requestMatchers("/api/user").hasAnyRole("SCOPE_profile", "SCOPE_email", "OAUTH2_USER")
                 .requestMatchers("/api/oidc").hasRole("SCOPE_openid")
                 .requestMatchers("/").permitAll()
-                .anyRequest().authenticated()
-        );
+                .anyRequest().authenticated());
+
+//        http.formLogin(formLogin -> formLogin
+//                .loginPage("/login")
+//                .loginProcessingUrl("/loginProc")
+//                .defaultSuccessUrl("/")
+//                .permitAll());
+
+//        http.exceptionHandling(exceptionHandling -> exceptionHandling
+//                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")));
 
         http.oauth2Login(oauth2 -> oauth2
-                .authorizationEndpoint(authorizationEndpointConfig -> authorizationEndpointConfig
-                        .authorizationRequestResolver(customOAuthorizationRequestResolver()))
+//                .authorizationEndpoint(authorizationEndpointConfig -> authorizationEndpointConfig
+//                        .authorizationRequestResolver(customOAuthorizationRequestResolver()))
                 .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig
                         .userService(customOAuth2UserService)
                         .oidcUserService(customOidcUserService)));

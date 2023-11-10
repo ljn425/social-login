@@ -1,7 +1,7 @@
 package oauth2client.sociallogin.repository;
 
 import lombok.extern.slf4j.Slf4j;
-import oauth2client.sociallogin.model.User;
+import oauth2client.sociallogin.model.users.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;

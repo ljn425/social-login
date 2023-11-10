@@ -2,7 +2,7 @@ package oauth2client.sociallogin.service;
 
 import lombok.RequiredArgsConstructor;
 import oauth2client.sociallogin.model.ProviderUser;
-import oauth2client.sociallogin.model.User;
+import oauth2client.sociallogin.model.users.User;
 import oauth2client.sociallogin.repository.UserRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package oauth2client.sociallogin.model;
+package oauth2client.sociallogin.model.users;
 
 import lombok.Builder;
 import lombok.Data;

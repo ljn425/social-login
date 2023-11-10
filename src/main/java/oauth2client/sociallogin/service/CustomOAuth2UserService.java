@@ -1,5 +1,7 @@
 package oauth2client.sociallogin.service;
 
+import oauth2client.sociallogin.converters.ProviderUserConverter;
+import oauth2client.sociallogin.converters.ProviderUserRequest;
 import oauth2client.sociallogin.model.ProviderUser;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -11,8 +13,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomOAuth2UserService extends AbstractOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
-    public CustomOAuth2UserService(UserService userService) {
-        super(userService);
+    public CustomOAuth2UserService(UserService userService,
+                                   ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter) {
+        super(userService, providerUserConverter);
     }
 
     @Override
@@ -22,7 +25,9 @@ public class CustomOAuth2UserService extends AbstractOAuth2UserService implement
 
         OAuth2User oAuth2User = oAuth2UserService.loadUser(userRequest); // 인가서버에 유저정보 요청 (userInfo)
 
-        ProviderUser providerUser = super.providerUser(clientRegistration, oAuth2User); // 인가서버에 맞춰 User 객체 생성 ex) google, naver 등
+        ProviderUserRequest providerUserRequest = new ProviderUserRequest(clientRegistration, oAuth2User);
+
+        ProviderUser providerUser = providerUser(providerUserRequest); // 인가서버에 맞춰 User 객체 생성 ex) google, naver 등
         // DB 회원가입
         super.register(providerUser, userRequest);
 
